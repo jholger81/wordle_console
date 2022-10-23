@@ -2,27 +2,7 @@
 using WordleConsole.Wordle;
 using WordleConsole.Extensions;
 
-//List<string> wortliste;
-//wortliste = Operations.Load_List();
-
-//Load List
-//int wortLaenge = 5;
-//Console.WriteLine($"{wortliste.Count()} Wörter in geladener Liste");
-//wortliste = Operations.Transform_List_to_X_Chars_List(wortliste, wortLaenge);
-//Console.WriteLine($"{wortliste.Count()} Wörter mit {wortLaenge} Buchstaben in Liste");
-//Operations.Save_List(wortliste);
-
-//erzeuge Liste zu erratender Wörter
-//int anzahlWoerter = 3;
-//List<string> zu_erraten_Liste = Operations.Create_List(wortliste, anzahlWoerter);
-
-//Start Game
-//Game wordle = new Game(zu_erraten_Liste, anzahlWoerter, wortLaenge);
 Game wordle = new Game();
-
-//TEST
-//foreach (var x in wordle.Wortliste)
-//    Console.WriteLine(x);
 
 string guess;
 int wort_zaehler, position;
@@ -91,7 +71,7 @@ for (int i = 1; i <= 10; i++)
     Console.Write("   ");
 }
 
-//Auflösung
+//Aufloesung
 Console.WriteLine("Die Wörter waren:");
 foreach (var wort in wordle.Wortliste)
 {
