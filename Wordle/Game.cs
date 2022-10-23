@@ -19,20 +19,7 @@ namespace WordleConsole.Wordle
         public bool Show_chars_not_tried { get; set; }
         public SettingsManager SettingsManager { get; set; }
         List<string> Zu_erraten_Liste { get; set; }
-        //public Game(List<string> input, int aw, int wLaenge)
-        //{
-        //    Wortliste = input;
-        //    Anzahl_woerter = aw;
-        //    Already_guessed_right = new List<bool>();
-        //    for (int i = 0; i < Anzahl_woerter; i++)
-        //        Already_guessed_right.Add(false);
-        //    SettingsManager = new SettingsManager();
-        //    SettingsManager?.Load();
-        //    WortLaenge = wLaenge;
-        //    Chars_not_tried = new List<char>();
-        //    Chars_not_tried.AddRange("ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ");
-        //    Show_chars_not_tried = true;
-        //}
+
         public Game()
         {
             SettingsManager = new SettingsManager();
@@ -40,11 +27,9 @@ namespace WordleConsole.Wordle
 
             Wortliste = Operations.Load_List(); //TODO nicht statischer Pfad zur Liste
             Anzahl_woerter = SettingsManager.Settings.NumberOfWords;
-            Console.WriteLine("Anzahl woerter: "+Anzahl_woerter);
             WortLaenge = SettingsManager.Settings.WordLength;
             Wortliste = Operations.Transform_List_to_X_Chars_List(Wortliste, WortLaenge);
             Zu_erraten_Liste = Operations.Create_List(Wortliste, Anzahl_woerter);
-            Console.WriteLine("Laenge Liste: "+Zu_erraten_Liste.Count());
 
             Already_guessed_right = new List<bool>();
             for (int i = 0; i < Anzahl_woerter; i++)
@@ -58,7 +43,7 @@ namespace WordleConsole.Wordle
             List<List<Stuff.Guess>> result = new List<List<Stuff.Guess>>();
             List<Stuff.Guess> singleResult;
             int charCountWort, charCountGuess, auftreten;
-            foreach (var wort in Zu_erraten_Liste/*Wortliste*/)
+            foreach (var wort in Zu_erraten_Liste)
             {
                 singleResult = new List<Stuff.Guess>();
                 for (int i = 0; i < WortLaenge; i++)
@@ -113,14 +98,13 @@ namespace WordleConsole.Wordle
             return true;
         }
 
-        public List<char> RemoveCharsFromList(string guessed_word)
-        {
-            List<char> result = new List<char>();
-            foreach(char c in Chars_not_tried)
-                if (!guessed_word.Contains(c))
-                    result.Add(c);
-            //result.Sort();
-            return result;
-        }
+        //public List<char> RemoveCharsFromList(string guessed_word)
+        //{
+        //    List<char> result = new List<char>();
+        //    foreach(char c in Chars_not_tried)
+        //        if (!guessed_word.Contains(c))
+        //            result.Add(c);
+        //    return result;
+        //}
     }
 }

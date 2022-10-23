@@ -8,11 +8,11 @@ namespace WordleConsole.Extensions
 {
     public static class ListExtensions
     {
-        public static List<char> Remove_Char_From_List(this List<char> input, char charToRemove)
+        public static List<char> Remove_Char_From_List(this List<char> input, string charsToRemove)
         {
             List<char> result = new List<char>();
-            foreach(var c in input)
-                if (!input.Contains(c))
+            foreach(char c in input)
+                if (!charsToRemove.Contains(c))
                     result.Add(c);
             return result;
         }
