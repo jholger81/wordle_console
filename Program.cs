@@ -16,10 +16,7 @@ for (int i = 1; i <= 10; i++)
     } while (guess.Length != wordle.SettingsManager.Settings.WordLength);
     guess = guess.ToUpper();
 
-    var comparer = wordle.Compare(guess);
-    Console.WriteLine(comparer.Count());
-
-    foreach (var word in comparer)
+    foreach (var word in wordle.Compare(guess))
     {
         position = 0;
         //skip already guessed right words
@@ -62,7 +59,7 @@ for (int i = 1; i <= 10; i++)
     //show unused characters
     Console.BackgroundColor = ConsoleColor.White;
     Console.ForegroundColor = ConsoleColor.Black;
-    wordle.Chars_not_tried = wordle.RemoveCharsFromList(guess);
+    wordle.Chars_not_tried.Remove_Char_From_List(guess);
     foreach (char c in wordle.Chars_not_tried)
         Console.Write($" {c}");
     Console.Write(" ");

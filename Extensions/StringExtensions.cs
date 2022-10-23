@@ -34,20 +34,5 @@ namespace WordleConsole.Extensions
             }
             return count;
         }
-
-        //public static bool CheckIfOtherPositionsAreRight(this string inputString, string compareString, int exceptPosition)
-        //{
-        //    char charToCompare = compareString[exceptPosition];
-        //    int count = 0;
-        //    int pos;
-        //    foreach (char c in inputString)
-        //    {
-        //        pos = 0;
-        //        if (c == charToCompare && pos != exceptPosition)
-        //            return;
-        //        pos++;
-        //    }
-        //    return true;
-        //}
     }
 }

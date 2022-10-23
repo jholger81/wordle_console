@@ -9,40 +9,38 @@ namespace WordleConsole.Wordlist
 {
     public class Operations
     {
-        static string listPath = "C:\\Source\\WordleConsole\\WordleConsole\\input.txt"; //TODO nicht statischer Pfad
+        static string listPath = "C:\\Source\\Wordle_Console\\Wordle_Console\\input.txt"; //TODO nicht statischer Pfad
 
         public static List<string> Load_List()
         {
             String? line;
             List<string> result = new List<string>();
-            try
-            {
-                StreamReader sr = new StreamReader(listPath);
-                do
+            bool haveList = false;
+            StreamReader sr;
+            string newPath = "";
+            do {
+                try
                 {
-                    line = sr.ReadLine();
-                    result.Add(line);
-                } while (line != null);
-                sr.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception: " + e.Message);
-            }
-            return result;
-        }
-
-        public static List<string> Transform_List_to_5_Chars_List(List<string> input)
-        {
-            List<string> result = new List<string>();
-            foreach (string line in input)
-            {
-                if (line == null)
-                    continue;
-                if (line.Length==5)
-                    result.Add(line);
-            }
-            return result;
+                    if (newPath == "")
+                        sr = new StreamReader(listPath);
+                    else
+                        sr = new StreamReader(newPath);
+                    do
+                    {
+                        line = sr.ReadLine();
+                        result.Add(line);
+                    } while (line != null);
+                    sr.Close();
+                    haveList = true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Exception: " + e.Message);
+                    Console.Write("Enter path: ");
+                    newPath = Console.ReadLine();
+                }
+            } while (!haveList);
+            return result; // TODO bei Wechsel des Pfades direkt speichern in Config
         }
 
         public static List<string> Transform_List_to_X_Chars_List(List<string> input, int wLaenge)
@@ -56,11 +54,6 @@ namespace WordleConsole.Wordlist
                     result.Add(line);
             }
             return result;
-        }
-
-        public static void Save_List(List<string> input)
-        {
-            // TODO
         }
 
         public static string Get_Word_From_List(List<string> input)

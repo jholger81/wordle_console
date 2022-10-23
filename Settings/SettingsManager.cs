@@ -36,14 +36,16 @@ namespace WordleConsole.Settings
                 }
                 catch
                 {
-                    Settings = LoadDefaults();
                     Console.WriteLine($"Couldn't load Settings file with path {settingsPath}; using defaults");
+                    Settings = LoadDefaults();
+                    SaveSettings();
                 }
             }
             else
             {
                 Console.WriteLine($"Settings file not found; path {settingsPath}; using defaults");
                 Settings = LoadDefaults();
+                SaveSettings();
             }
         }
 
@@ -57,18 +59,17 @@ namespace WordleConsole.Settings
             return res;
         }
 
-        public void Save()
+        public void SaveSettings()
         {
-            Console.WriteLine("Not implemented");
-            //lock (_writeLock)
-            //{
-            //    using (var writer = new StreamWriter(gamePath + "Settings.xml"))
-            //    {
-            //        serializer.Serialize(writer, Settings);
-            //        writer.Flush();
-            //        writer.BaseStream.Flush();
-            //    }
-            //}
+            lock (_writeLock)
+            {
+                using (var writer = new StreamWriter(gamePath + "\\Settings.xml"))
+                {
+                    serializer.Serialize(writer, Settings);
+                    writer.Flush();
+                    writer.BaseStream.Flush();
+                }
+            }
         }
         
         public SettingsManager()
