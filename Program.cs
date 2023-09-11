@@ -59,7 +59,7 @@ for (int i = 1; i <= 10; i++)
     //show unused characters
     Console.BackgroundColor = ConsoleColor.White;
     Console.ForegroundColor = ConsoleColor.Black;
-    wordle.Chars_not_tried.Remove_Char_From_List(guess);
+    wordle.Chars_not_tried = wordle.Chars_not_tried.Remove_Char_From_List(guess);
     foreach (char c in wordle.Chars_not_tried)
         Console.Write($" {c}");
     Console.Write(" ");
@@ -70,7 +70,7 @@ for (int i = 1; i <= 10; i++)
 
 //Aufloesung
 Console.WriteLine("Die Wörter waren:");
-foreach (var wort in wordle.Wortliste)
+foreach (var wort in wordle.Zu_erraten_Liste)
 {
     Console.WriteLine(wort);
 }

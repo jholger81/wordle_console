@@ -22,10 +22,11 @@ namespace WordleConsole.Wordle
 
         public Game()
         {
+            string newPath = "";
             SettingsManager = new SettingsManager();
             SettingsManager?.Load();
 
-            Wortliste = Operations.Load_List(); //TODO nicht statischer Pfad zur Liste
+            (Wortliste, newPath) = Operations.Load_List(SettingsManager.Settings.PathToWordList);
             Anzahl_woerter = SettingsManager.Settings.NumberOfWords;
             WortLaenge = SettingsManager.Settings.WordLength;
             Wortliste = Operations.Transform_List_to_X_Chars_List(Wortliste, WortLaenge);
@@ -37,6 +38,12 @@ namespace WordleConsole.Wordle
             Chars_not_tried = new List<char>();
             Chars_not_tried.AddRange("ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ");
             Show_chars_not_tried = true;
+
+            if (SettingsManager.Settings.PathToWordList != newPath)
+            {
+                SettingsManager.Settings.PathToWordList = newPath;
+                SettingsManager.SaveSettings();
+            }
         }
         public List<List<Stuff.Guess>> Compare(string guessed_word)
         {
@@ -97,14 +104,5 @@ namespace WordleConsole.Wordle
             }
             return true;
         }
-
-        //public List<char> RemoveCharsFromList(string guessed_word)
-        //{
-        //    List<char> result = new List<char>();
-        //    foreach(char c in Chars_not_tried)
-        //        if (!guessed_word.Contains(c))
-        //            result.Add(c);
-        //    return result;
-        //}
     }
 }

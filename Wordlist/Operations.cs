@@ -9,9 +9,7 @@ namespace WordleConsole.Wordlist
 {
     public class Operations
     {
-        static string listPath = "C:\\Source\\Wordle_Console\\Wordle_Console\\input.txt"; //TODO nicht statischer Pfad
-
-        public static List<string> Load_List()
+        public static (List<string>, string) Load_List(string listPath)
         {
             String? line;
             List<string> result = new List<string>();
@@ -40,7 +38,8 @@ namespace WordleConsole.Wordlist
                     newPath = Console.ReadLine();
                 }
             } while (!haveList);
-            return result; // TODO bei Wechsel des Pfades direkt speichern in Config
+            newPath = newPath == "" ? listPath : newPath;
+            return (result, newPath);
         }
 
         public static List<string> Transform_List_to_X_Chars_List(List<string> input, int wLaenge)
